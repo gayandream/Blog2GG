@@ -1,0 +1,14 @@
+---
+title: my first post
+author: Gayan Gunaratne
+date: '2021-07-26'
+slug: []
+categories:
+  - R
+  - Rstudio
+  - Rmarkdown
+tags:
+  - R Markdown
+draft: yes
+---
+

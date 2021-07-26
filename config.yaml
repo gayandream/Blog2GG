@@ -1,15 +1,15 @@
 baseURL: https://r4modellers.netlify.app/
 languageCode: en-us
-title: Cactus theme example
+title: R for Environmental Modellers
 theme: hugo-theme-cactus
-copyright: You
+copyright: Gayan Gunaratne
 disqusShortname: example
 menu:
   main:
     - name: Home
       url: /
       weight: 1
-    - name: Writings
+    - name: Posts
       url: /posts
       weight: 2
     - name: Tags
@@ -36,7 +36,7 @@ markup:
 params:
   colortheme: white
   comments:
-    enabled: no
+    enabled: yes
     engine: disqus
   dateFormat: '2006-01-02'
   description: Hugo is a general-purpose website framework. Technically speaking,
@@ -56,10 +56,10 @@ params:
   showProjectsList: yes
   showReadTime: yes
   social:
-    - link: https://github.com/gohugoio
+    - link: https://github.com/gayandream
       name: github
-    - link: https://www.linkedin.com/company/github/
+    - link: https://www.linkedin.com/in/gayan-gunaratne-45313219/?originalSubdomain=au
       name: linkedin
-    - link: example@example.com
+    - link: gayandream@yahoo.com
       name: email
   tagsOverview: yes
