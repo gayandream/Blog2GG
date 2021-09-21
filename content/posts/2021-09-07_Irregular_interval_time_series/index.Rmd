@@ -1,16 +1,9 @@
 ---
-title: "Creating an irregular interval time series"
-author: "Gayan Gnaratne"
-date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
-#date: 14-09-2021
-output: 
-  bookdown::html_document2:
-  #html_document:
-  toc: true
-  toc_float: true
-  number_sections: true
-theme: united
-  
+title: "Irregular interval time series"
+author: "Gayan Gunaratne"
+date: 2021-09-07T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
 ---
 
 ```{r lib, message = FALSE, warnings = FALSE, comment=FALSE, results=FALSE}
