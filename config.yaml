@@ -39,16 +39,18 @@ params:
     enabled: yes
     engine: disqus
   dateFormat: '2006-01-02'
-  description: Hugo is a general-purpose website framework. Technically speaking,
-    Hugo is a static site generator. Unlike systems that dynamically build a page
-    with each visitor request, Hugo builds pages when you create or update your content.
-    Since websites are viewed far more often than they are edited, Hugo is designed
-    to provide an optimal viewing experience for your website’s end users and an ideal
-    writing experience for website authors.
+  description: If you use R for environmental modelling you might find something helpful here. 
+    If you dont know who is an environmental modeller, probably google search is the best option.
+    I sometimes write R scripts, because it make my work life easier.
+    R scripts facilitate automation across my modelling decslplnes including hydrodynamic and water quality modelling. 
+    You will find a few blog posts here about my R scripts and their usage.
+    I am wrting this blog for me. Thus, under no circumstances I'm under any obligation to make sense any blog posts to you.
+    However, your consctructive crticism is always accepted and appreciated.
+    Because I wanna get beetr at what I'm doing (what ever this is ).
   googleAnalyticsAsync: yes
   mainSection: posts
   postsOnHomePage: 5
-  projectsUrl: https://github.com/gohugoio
+  projectsUrl: https://github.com/gayandream
   rss: yes
   show_updated: yes
   showAllPostsArchive: no
