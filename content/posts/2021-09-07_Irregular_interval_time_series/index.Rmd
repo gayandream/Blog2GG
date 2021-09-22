@@ -6,6 +6,10 @@ categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+``` 
+
 ```{r lib, message = FALSE, warnings = FALSE, comment=FALSE, results=FALSE}
 #libraries
 library(here)
@@ -136,7 +140,7 @@ time_series2<-time_series1 %>%
 
 head(time_series2)
 
-write.csv(time_series2, file="particle_release_time_series.csv",row.names = FALSE,quote=F)
+#write.csv(time_series2, file="particle_release_time_series.csv",row.names = FALSE,quote=F)
 
 ```
 ```{r plot}

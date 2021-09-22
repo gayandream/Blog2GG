@@ -1,29 +1,192 @@
 ---
-title: my first post
-author: Gayan Gunaratne
-date: '2021-07-26'
-slug: []
-categories:
-  - R
-  - Rstudio
-  - Rmarkdown
-tags:
-  - R Markdown
-draft: yes
+title: "Irregular interval time series"
+author: "Gayan Gunaratne"
+date: 2021-09-07T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
 ---
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
-<div id="fggsfhsrthsrth" class="section level2">
-<h2>fggsfhsrthsrth</h2>
-<p>argaeraeryaerfth staet sttyastae argar argaer argar</p>
-<pre class="r"><code>head(mtcars)</code></pre>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<pre class="r"><code>#libraries
+library(here)
+library (dplyr)
+library(tidyr)
+library(ggplot2)
+FALSE Warning: package &#39;ggplot2&#39; was built under R version 4.1.1</code></pre>
+<div id="creating-irregular-time-series-by-setting-up-start-and-end-date-times." class="section level2">
+<h2>Creating irregular time series by setting up start and end date times.</h2>
+<pre class="r"><code>start_date&lt;- &quot;2021-04-01&quot;
+end_date&lt;- &quot;2021-05-31&quot;
+
+my_date_format&lt;- &quot;%Y-%m-%d %H:%M&quot;
+time_interval &lt;- &quot;1440 min&quot;
+
+time1 &lt;- &quot;00:01&quot;
+end_time &lt;- &quot;23:59&quot;
+time2 &lt;- &quot;06:59&quot;
+time3 &lt;- &quot;07:00&quot;
+time4 &lt;- &quot;10:00&quot;
+time5 &lt;- &quot;10:01&quot;
+time6 &lt;- &quot;14:59&quot;
+time7 &lt;- &quot;15:00&quot;
+time8 &lt;- &quot;18:00&quot;
+time9 &lt;- &quot;18:01&quot;
+
+feed_release &lt;- 0.002536783
+faecal1_release &lt;- 0.031075596
+faecal2_release &lt;- 0.039827499
+faecal3_release &lt;- 0.05339929
+
+
+start_time1&lt;-as.POSIXct(paste(start_date, time1),format=my_date_format)
+end_time1&lt;-as.POSIXct(paste(end_date, end_time),format=my_date_format)
+start_time2&lt;-as.POSIXct(paste(start_date, time2),format=my_date_format)
+end_time2&lt;-as.POSIXct(paste(end_date, time2),format=my_date_format)
+start_time3&lt;-as.POSIXct(paste(start_date, time3),format=my_date_format)
+end_time3&lt;-as.POSIXct(paste(end_date, time3),format=my_date_format)
+start_time4&lt;-as.POSIXct(paste(start_date, time4),format=my_date_format)
+end_time4&lt;-as.POSIXct(paste(end_date, time4),format=my_date_format)
+start_time5&lt;-as.POSIXct(paste(start_date, time5),format=my_date_format)
+end_time5&lt;-as.POSIXct(paste(end_date, time5),format=my_date_format)
+start_time6&lt;-as.POSIXct(paste(start_date, time6),format=my_date_format)
+end_time6&lt;-as.POSIXct(paste(end_date, time6),format=my_date_format)
+start_time7&lt;-as.POSIXct(paste(start_date, time7),format=my_date_format)
+end_time7&lt;-as.POSIXct(paste(end_date, time7),format=my_date_format)
+start_time8&lt;-as.POSIXct(paste(start_date, time8),format=my_date_format)
+end_time8&lt;-as.POSIXct(paste(end_date, time8),format=my_date_format)
+start_time9&lt;-as.POSIXct(paste(start_date, time9),format=my_date_format)
+end_time9&lt;-as.POSIXct(paste(end_date, time9),format=my_date_format)</code></pre>
+<pre class="r"><code>df1&lt;-setNames(data.frame(seq(from=start_time1,to=end_time1,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df2&lt;-setNames(data.frame(seq(from=start_time2,to=end_time2,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df3&lt;-setNames(data.frame(seq(from=start_time3,to=end_time3,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df4&lt;-setNames(data.frame(seq(from=start_time4,to=end_time4,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df5&lt;-setNames(data.frame(seq(from=start_time5,to=end_time5,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df6&lt;-setNames(data.frame(seq(from=start_time6,to=end_time6,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df7&lt;-setNames(data.frame(seq(from=start_time7,to=end_time7,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df8&lt;-setNames(data.frame(seq(from=start_time8,to=end_time8,by=time_interval,format=my_date_format)),&quot;time&quot;)
+df9&lt;-setNames(data.frame(seq(from=start_time9,to=end_time9,by=time_interval,format=my_date_format)),&quot;time&quot;)
+
+time_series&lt;-Reduce(function(x,y) merge(x,y,by=&quot;time&quot;,all=TRUE) ,list(df1,df2,df3,df4,df5,df6,df7,df8,df9))
+head(time_series)
+##                  time
+## 1 2021-04-01 00:01:00
+## 2 2021-04-01 06:59:00
+## 3 2021-04-01 07:00:00
+## 4 2021-04-01 10:00:00
+## 5 2021-04-01 10:01:00
+## 6 2021-04-01 14:59:00</code></pre>
+<pre class="r"><code>
+time_series$date_time &lt;- format(as.POSIXct(time_series$time), &quot;%d-%m-%Y %H:%M&quot;)
+#head(time_series)
+
+time_series1 &lt;- separate(data = time_series, col = date_time, into  = c(&#39;Date&#39;, &#39;Time&#39;), sep = &#39; &#39;)
+head(time_series1)
+##                  time       Date  Time
+## 1 2021-04-01 00:01:00 01-04-2021 00:01
+## 2 2021-04-01 06:59:00 01-04-2021 06:59
+## 3 2021-04-01 07:00:00 01-04-2021 07:00
+## 4 2021-04-01 10:00:00 01-04-2021 10:00
+## 5 2021-04-01 10:01:00 01-04-2021 10:01
+## 6 2021-04-01 14:59:00 01-04-2021 14:59
+
+# for feed
+time_series1&lt;-time_series1 %&gt;%
+     mutate(feed = case_when((Time == time3) ~ feed_release,
+                              (Time == time4) ~ feed_release,
+                              (Time == time7) ~ feed_release,
+                              (Time == time8) ~ feed_release,
+                            TRUE ~ 0))
+
+# for fecal1
+time_series1&lt;-time_series1 %&gt;%
+     mutate(faecal_1= case_when((Time == time3) ~ faecal1_release,
+                              (Time == time4) ~ faecal1_release,
+                              (Time == time7) ~ faecal1_release,
+                              (Time == time8) ~ faecal1_release,
+                            TRUE ~ 0))
+# for fecal2
+time_series1&lt;-time_series1 %&gt;%
+     mutate(faecal_2= case_when((Time == time3) ~ faecal2_release,
+                              (Time == time4) ~ faecal2_release,
+                              (Time == time7) ~ faecal2_release,
+                              (Time == time8) ~ faecal2_release,
+                            TRUE ~ 0))
+
+# for fecal3
+time_series1&lt;-time_series1 %&gt;%
+     mutate(faecal_3= case_when((Time == time3) ~ faecal3_release,
+                              (Time == time4) ~ faecal3_release,
+                              (Time == time7) ~ faecal3_release,
+                              (Time == time8) ~ faecal3_release,
+                            TRUE ~ 0))
+head(time_series1)
+##                  time       Date  Time        feed  faecal_1  faecal_2
+## 1 2021-04-01 00:01:00 01-04-2021 00:01 0.000000000 0.0000000 0.0000000
+## 2 2021-04-01 06:59:00 01-04-2021 06:59 0.000000000 0.0000000 0.0000000
+## 3 2021-04-01 07:00:00 01-04-2021 07:00 0.002536783 0.0310756 0.0398275
+## 4 2021-04-01 10:00:00 01-04-2021 10:00 0.002536783 0.0310756 0.0398275
+## 5 2021-04-01 10:01:00 01-04-2021 10:01 0.000000000 0.0000000 0.0000000
+## 6 2021-04-01 14:59:00 01-04-2021 14:59 0.000000000 0.0000000 0.0000000
+##     faecal_3
+## 1 0.00000000
+## 2 0.00000000
+## 3 0.05339929
+## 4 0.05339929
+## 5 0.00000000
+## 6 0.00000000</code></pre>
+<pre class="r"><code>
+time_series1 &lt;-time_series1 %&gt;%
+  unite(&quot;Date_time&quot;, Date:Time,na.rm = TRUE, remove = TRUE,sep=&#39; &#39;)
+head(time_series1)
+##                  time        Date_time        feed  faecal_1  faecal_2
+## 1 2021-04-01 00:01:00 01-04-2021 00:01 0.000000000 0.0000000 0.0000000
+## 2 2021-04-01 06:59:00 01-04-2021 06:59 0.000000000 0.0000000 0.0000000
+## 3 2021-04-01 07:00:00 01-04-2021 07:00 0.002536783 0.0310756 0.0398275
+## 4 2021-04-01 10:00:00 01-04-2021 10:00 0.002536783 0.0310756 0.0398275
+## 5 2021-04-01 10:01:00 01-04-2021 10:01 0.000000000 0.0000000 0.0000000
+## 6 2021-04-01 14:59:00 01-04-2021 14:59 0.000000000 0.0000000 0.0000000
+##     faecal_3
+## 1 0.00000000
+## 2 0.00000000
+## 3 0.05339929
+## 4 0.05339929
+## 5 0.00000000
+## 6 0.00000000
+time_series2&lt;-time_series1 %&gt;%
+  mutate(TIME = gsub(&#39;-&#39;, &#39;/&#39;, Date_time))%&gt;%
+  select(TIME,feed,faecal_1,faecal_2,faecal_3)
+
+
+head(time_series2)
+##               TIME        feed  faecal_1  faecal_2   faecal_3
+## 1 01/04/2021 00:01 0.000000000 0.0000000 0.0000000 0.00000000
+## 2 01/04/2021 06:59 0.000000000 0.0000000 0.0000000 0.00000000
+## 3 01/04/2021 07:00 0.002536783 0.0310756 0.0398275 0.05339929
+## 4 01/04/2021 10:00 0.002536783 0.0310756 0.0398275 0.05339929
+## 5 01/04/2021 10:01 0.000000000 0.0000000 0.0000000 0.00000000
+## 6 01/04/2021 14:59 0.000000000 0.0000000 0.0000000 0.00000000
+
+#write.csv(time_series2, file=&quot;particle_release_time_series.csv&quot;,row.names = FALSE,quote=F)</code></pre>
+<pre class="r"><code>time_series3 &lt;-time_series1 [,c(1,3:6)]
+time_series3 &lt;-time_series3 %&gt;%
+  pivot_longer(-time,names_to = &quot;particle_name&quot;,values_to = &quot;value&quot;)
+head(time_series3)
+## # A tibble: 6 x 3
+##   time                particle_name value
+##   &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+## 1 2021-04-01 00:01:00 feed              0
+## 2 2021-04-01 00:01:00 faecal_1          0
+## 3 2021-04-01 00:01:00 faecal_2          0
+## 4 2021-04-01 00:01:00 faecal_3          0
+## 5 2021-04-01 06:59:00 feed              0
+## 6 2021-04-01 06:59:00 faecal_1          0
+
+#plot
+p &lt;- ggplot(time_series3, aes(x=time, y=value,group=particle_name, colour=particle_name)) +
+  geom_point() + 
+  xlab(&quot;&quot;)
+p</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="672" /></p>
 </div>
