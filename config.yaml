@@ -40,14 +40,14 @@ params:
     engine: disqus
   dateFormat: '2006-01-02'
   description: If you use R for environmental modelling you might find something helpful here. 
-    If you dont know who is an environmental modeller, probably 'google search' is the best option.
+    If you dont know what is environmental modelleing, probably 'google search' is the best option.
     
     I sometimes write R scripts, because it makes my work life a lot easier.
-    R scripts facilitate automation across my modelling desciplines including hydrodynamic and water quality. 
+    R scripts facilitate automation to use my numerical tools (TUFLOFV, QGIS,eWater SOURCE,handling netcdf) effectively and efficiently. 
     
     I am wrting this blog for me. Thus, under no circumstances I'm under any obligation to make sense any blog posts to you.
     However, your consctructive crticism is always accepted and appreciated.
-    Because I wanna get beetr at what I'm doing (what ever this is ).
+    Because I wanna get better at what I'm doing (whatever this is ).
   googleAnalyticsAsync: yes
   mainSection: posts
   postsOnHomePage: 5
